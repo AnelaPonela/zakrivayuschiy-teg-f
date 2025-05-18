@@ -195,6 +195,9 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 90%;
+  mix-blend-mode: difference;
+  color: var(--color-accent, #fff);
+  z-index: 1;
 }
 
 .button__download {
@@ -324,7 +327,7 @@ article.card:nth-of-type(8) .card__memories {
 }
 
 .sepia-hue-rotate {
-  filter: sepia(75%), hue-rotate(-90deg);
+  filter: sepia(75%) hue-rotate(-90deg);
 }
 
 .invert {
@@ -387,12 +390,6 @@ article.card:nth-of-type(8) .card__memories {
   stroke: var(--color-accent, #fff);
   fill: var(--color-accent, #fff);
   z-index: 2;
-}
-
-.button__text {
-  mix-blend-mode: difference;
-  color: var(--color-accent, #fff);
-  z-index: 1;
 }
 
 /* Effects buttons end*/
