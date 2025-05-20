@@ -10,44 +10,27 @@
 
 */
 
-@keyframes heart-scale {
-  from {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.25);
-    transform-origin: center;
-  }
-
-  to {
-    transform: scale(1);
-  }
-}
-
-@keyframes spark-animation {
-  from {
-    opacity: 0;
-  }
-
-  50% {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-  }
-}
-
 .page {
   min-inline-size: 320px;
   min-block-size: 100dvb;
   font-family: var(--font-main, serif);
-  font-variation-settings: 'wght' var(--weight-main, 400);
+  font-variation-settings: "wght" var(--weight-main, 400);
   color: var(--color-main, #000);
-  background-image: var(--bg-gradient);
-  background-size: cover;
-  background-color: var(--bg-color, #fff);
+  background: var(
+      --bg-gradient,
+      repeating-linear-gradient(
+        to right,
+        rgba(211, 211, 211) 0 2px,
+        rgba(211, 211, 211, 0) 2px 4px
+      ),
+      repeating-linear-gradient(
+        to bottom,
+        rgba(211, 211, 211) 0 2px,
+        rgba(211, 211, 211, 0) 2px 4px
+      ),
+      linear-gradient(to bottom, #e7e7e7, #1a1a1a)
+    )
+    center / cover fixed var(--bg-color, #fff);
 }
 
 /* Start header */
@@ -60,8 +43,8 @@
 }
 
 .card {
-  background-color: white;
-  border: 2px solid black;
+  background-color: var(--bg-color, #fff);
+  border: 2px solid var(--contour-color, #000);
   min-inline-size: 375px;
   max-inline-size: var(--width, 43.75rem);
   display: flex;
@@ -78,15 +61,15 @@
   inline-size: var(--width, 43.75rem);
 }
 
-.header__title {
-  font-family: var(--font-accent, monospace);
+.header__logo {
+  font-family: var(--font-accent, fantasy);
   font-size: clamp(3.063rem, 2.063rem + 3.2vi, 4.063rem);
   vertical-align: bottom;
   text-transform: uppercase;
 }
 
-.header__text {
-  font-family: var(--font-accent, monospace);
+.header__title {
+  font-family: var(--font-accent, fantasy);
   font-size: clamp(0.875rem, 0.313rem + 1.8vi, 1.438rem);
   text-transform: uppercase;
 }
@@ -103,38 +86,42 @@
   padding-block-end: 105px;
 }
 
+/* Класс для коррекции для Pixel Perfect */
+
+.pixel__correction {
+  margin-block-end: 1px;
+}
+
 .card__title {
-  font-variation-settings: 'wght' var(--weight-title, 700);
+  font-variation-settings: "wght" var(--weight-title, 700);
   font-size: 18px;
   padding-block-start: 6px;
   padding-block-end: 4px;
   padding-inline: 10px;
-  border-bottom: 2px solid black;
 }
 
 .card__image {
   position: relative;
-  inline-size: var(--width, 43.75rem);
-  block-size: var(--width, 43.75rem);
 }
 
 .watermark {
+  text-shadow: 0px 0px 4px #fff;
+  mix-blend-mode: hard-light;
+  opacity: 0.5;
   position: absolute;
-  text-shadow: 1px #ffffff;
-  font-family: var(--font-accent, monospace);
+  font-family: var(--font-accent, fantasy);
   font-size: 14px;
   line-height: 100%;
   text-transform: uppercase;
   inset-inline-end: 25px;
   inset-block-start: 27px;
-  mix-blend-mode: hard-light;
   z-index: 1;
 }
 
-@supports ((text-stroke: 1px #ffffff) or (-webkit-text-stroke: 1px #ffffff)) {
+@supports ((text-stroke: 1px #fff) or (-webkit-text-stroke: 1px #fff)) {
   .watermark {
-    -webkit-text-stroke: 1px #ffffff;
-    text-stroke: 1px #ffffff;
+    -webkit-text-stroke: 1px #fff;
+    text-stroke: 1px #fff;
     text-shadow: none;
   }
 }
@@ -145,19 +132,18 @@
   object-position: right;
   inline-size: 100%;
   block-size: 100%;
+  border-top: 2px solid var(--contour-color, #000);
+  border-bottom: 2px solid var(--contour-color, #000);
+  aspect-ratio: 1 / 1;
 }
 
 .card__text {
-  border-top: 2px solid black;
   font-size: 18px;
   line-height: 21px;
-  padding: 25px 25px 27px;
-}
-
-.card__memories {
-  font-size: 18px;
-  line-height: 21px;
-  padding: 0 25px 25px;
+  padding: 30px 25px 25px;
+  display: flex;
+  gap: 25px;
+  flex-direction: column;
 }
 
 .card__buttons {
@@ -167,6 +153,17 @@
   margin-block-end: 25px;
   margin-inline-end: 25px;
   align-items: flex-end;
+}
+
+.button {
+  cursor: pointer;
+  background-color: var(--bg-color, #fff);
+  border: 2px solid var(--contour-color, #000);
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  gap: 8px;
 }
 
 .card__icon-button {
@@ -183,15 +180,10 @@
 .card__like-button {
   width: 130px;
   height: 38px;
-  background-color: transparent;
-  border: 2px solid #000;
-  padding: 0;
-  align-content: center;
-  cursor: pointer;
 }
 
 .button__text {
-  font-family: var(--font-accent, monospace);
+  font-family: var(--font-accent, fantasy);
   font-weight: 400;
   font-size: 14px;
   line-height: 90%;
@@ -203,48 +195,6 @@
 .button__download {
   width: 335px;
   height: 55px;
-  background-color: #fff;
-  border: 2px solid #000;
-  padding: 0;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  gap: 8px;
-  cursor: pointer;
-}
-
-/* Из-за личного текста карточки не сходятся с Pixel Perfet. Чтобы это исправить я буду менять разные padding */
-
-article.card:nth-of-type(1) .card__memories {
-  padding-bottom: 2px;
-}
-
-article.card:nth-of-type(2) .card__memories {
-  padding-bottom: 0px;
-}
-
-article.card:nth-of-type(3) .card__memories {
-  padding-bottom: 0px;
-}
-
-article.card:nth-of-type(4) .card__memories {
-  padding-bottom: 2px;
-}
-
-article.card:nth-of-type(5) .card__memories {
-  padding-bottom: 22px;
-}
-
-article.card:nth-of-type(6) .card__memories {
-  padding-bottom: 22px;
-}
-
-article.card:nth-of-type(7) .card__memories {
-  padding-bottom: 2px;
-}
-
-article.card:nth-of-type(8) .card__memories {
-  padding-bottom: 22px;
 }
 
 /* End main */
@@ -252,10 +202,9 @@ article.card:nth-of-type(8) .card__memories {
 /* Dialog start */
 
 .dialog {
-  width: 357px;
-  height: 193px;
-  background-color: #fff;
-  border: 2px solid #000;
+  background-color: var(--bg-color, #fff);
+  border: 2px solid var(--contour-color, #000);
+  padding: 30px;
 }
 
 .dialog::backdrop {
@@ -263,14 +212,14 @@ article.card:nth-of-type(8) .card__memories {
 }
 
 .dialog:open {
-  display: grid;
-  grid-template-columns: 39px 234px;
-  grid-template-rows: 63px 38px;
+  width: 353px;
   gap: 30px 20px;
+  grid-template-rows: 63px 38px;
+  grid-template-columns: auto auto;
+  display: grid;
+  place-items: center;
   align-items: center;
-  align-content: center;
-  justify-content: center;
-  justify-items: center;
+  overflow: hidden;
 }
 
 .dialog:open .dialog-floppy {
@@ -278,28 +227,21 @@ article.card:nth-of-type(8) .card__memories {
   grid-row: 1;
 }
 
-.dialog:open .button__text:first-of-type {
+.dialog:open p.button__text {
   line-height: 150%;
   text-transform: uppercase;
   grid-column: 2;
   grid-row: 1;
 }
 
-.dialog:open .button__ok {
-  grid-column: 1 / -1;
-  grid-row: 2;
-}
-
 .button__ok {
   width: 293px;
   height: 38px;
-  background-color: #fff;
-  border: 2px solid #000;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+}
+
+.dialog:open .form__ok {
+  grid-column: 1 / -1;
+  grid-row: 2;
 }
 
 /* Dialog end */
@@ -336,123 +278,9 @@ article.card:nth-of-type(8) .card__memories {
 
 /* Filters end*/
 
-/* Effects buttons start*/
-
-.card__like-button,
-.button__download,
-.button__ok {
-  transition: box-shadow 0.3s ease, transform 0.5s ease-in-out;
-  position: relative;
-}
-
-.card__icon-button:focus,
-.card__like-button:focus,
-.button__download:focus,
-.button__ok:focus {
-  outline: none;
-}
-
-.card__icon-button:focus-visible {
-  border-color: var(--color-main);
-}
-
-.card__like-button:focus-visible,
-.button__download:focus-visible,
-.button__ok:focus-visible {
-  box-shadow: 2px 2px 0 var(--color-main, #000);
-}
-
-.card__like-button::before,
-.button__download::before,
-.button__ok::before {
-  content: '';
-  display: block;
-  position: absolute;
-  background-color: #000;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.5s ease-in-out;
-  z-index: 0;
-}
-
-.card__like-button:hover::before,
-.button__download:hover::before,
-.button__ok:hover::before {
-  transform: scaleX(1);
-}
-
-.button__floppy {
-  mix-blend-mode: difference;
-  stroke: var(--color-accent, #fff);
-  fill: var(--color-accent, #fff);
-  z-index: 2;
-}
-
-/* Effects buttons end*/
-
-/* heart start */
-
-.sparks {
-  opacity: 0;
-}
-
-.core {
-  transition: fill 0.3s 0.03s;
-}
-
-.main-body {
-  transition: fill 0.3s 0.05s;
-}
-
-.contour {
-  transition: fill 0.3s 0.06s;
-}
-
-.card__icon-button:hover .core,
-.card__icon-button:hover .main-body {
-  fill: var(--contour-color);
-}
-
-.card__icon-button:not(:hover) .main-body {
-  transition-delay: 0;
-}
-
-.card__icon-button:active .core,
-.card__icon-button:active .main-body {
-  fill: var(--animation-fill-color);
-}
-
-.like-icon.is-liked .core,
-.like-icon.is-liked .main-body,
-.like-icon.is-liked .contour {
-  fill: var(--animation-fill-color);
-}
-
-.like-icon.is-liked .heart {
-  animation: heart-scale 0.3s ease-in 0.1s;
-}
-
-.like-icon.is-liked .sparks {
-  animation: spark-animation 0.3s ease-in 0.3s;
-}
-
-.like-icon:not(.is-liked) .contour {
-  transition: fill 0.1s linear;
-}
-
-/* heart end */
-
 /* for width <= 375px */
 
 @media (width <= 376px) {
-  .card__text {
-    padding: 23px 25px 47px;
-  }
-
   .header .card {
     padding-block: 120px;
   }
@@ -472,77 +300,12 @@ article.card:nth-of-type(8) .card__memories {
     inset-inline-end: 11px;
     inset-block-start: 25px;
   }
-  .dialog {
-    width: 341px;
-    height: 191px;
-  }
+
   .button__ok {
     width: 257px;
   }
 
   .dialog:open {
-    grid-template-columns: 39px 198px;
-  }
-
-  /* Из-за личного текста карточки не сходятся с Pixel Perfet. Чтобы это исправить я буду менять разные padding */
-
-  article.card:nth-of-type(1) .card__memories {
-    padding-bottom: 4px;
-  }
-
-  article.card:nth-of-type(2) .card__text {
-    padding-bottom: 27px;
-  }
-
-  article.card:nth-of-type(2) .card__memories {
-    padding-bottom: 3px;
-  }
-
-  article.card:nth-of-type(3) .card__text {
-    padding-bottom: 27px;
-  }
-
-  article.card:nth-of-type(3) .card__memories {
-    padding-bottom: 3px;
-  }
-
-  article.card:nth-of-type(4) .card__text {
-    padding-bottom: 27px;
-  }
-
-  article.card:nth-of-type(4) .card__memories {
-    padding-bottom: 3px;
-  }
-
-  article.card:nth-of-type(5) .card__text {
-    padding-bottom: 27px;
-  }
-
-  article.card:nth-of-type(5) .card__memories {
-    padding-bottom: 25px;
-  }
-
-  article.card:nth-of-type(6) .card__text {
-    padding-bottom: 27px;
-  }
-
-  article.card:nth-of-type(6) .card__memories {
-    padding-bottom: 24px;
-  }
-
-  article.card:nth-of-type(7) .card__text {
-    padding-bottom: 25px;
-  }
-
-  article.card:nth-of-type(7) .card__memories {
-    padding-bottom: 4px;
-  }
-
-  article.card:nth-of-type(8) .card__text {
-    padding-bottom: 25px;
-  }
-
-  article.card:nth-of-type(8) .card__memories {
-    padding-bottom: 27px;
+    width: 341px;
   }
 }

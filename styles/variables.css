@@ -4,8 +4,8 @@
   --color-main: #000;
   --color-accent: #fff;
 
-  --font-main: 'Inter-Variable', serif;
-  --font-accent: 'PressStart2P-Regular', monospace;
+  --font-main: "Inter-Variable", serif;
+  --font-accent: "PressStart2P", fantasy;
   --weight-main: 400;
   --weight-title: 700;
   --width: clamp(23.438rem, 3.125rem + 65vi, 43.75rem);
@@ -22,5 +22,5 @@
     linear-gradient(to bottom, #e7e7e7, #1a1a1a);
   --bg-color: #fff;
   --contour-color: #000;
-  --animation-fill-color: #FF0000;
+  --animation-fill-color: #ff0000;
 }
