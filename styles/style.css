@@ -214,11 +214,11 @@
 .dialog:open {
   width: 353px;
   gap: 30px 20px;
-  grid-template-rows: 63px 38px;
+  grid-template-rows: auto auto;
   grid-template-columns: auto auto;
   display: grid;
-  place-items: center;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
 }
 
@@ -257,7 +257,7 @@
 }
 
 .blur {
-  filter: blur(26%);
+  filter: blur(3px);
 }
 
 .grayscale {
@@ -303,6 +303,10 @@
 
   .button__ok {
     width: 257px;
+  }
+
+  .dialog {
+    padding: 30px 42px;
   }
 
   .dialog:open {
